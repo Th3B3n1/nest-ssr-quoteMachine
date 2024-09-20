@@ -28,7 +28,14 @@ export class AppController {
   @Get("deleteQuery")
   deleteQuery(@Query() query)
   {
-    return this.appService.deleteQuery(Number(query.id));
+    if (this.appService.deleteQuery(Number(query.id)))
+    {
+      return "Delete successful 200";
+    }
+    else
+    {
+      return "Not found 404";
+    }
   }
 
   @Get("randomQuote")

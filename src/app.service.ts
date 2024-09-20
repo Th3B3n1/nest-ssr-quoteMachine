@@ -23,9 +23,16 @@ export class AppService {
   {
     let localQueries = queries;
     let query = localQueries.quotes.splice(id - 1, 1);
-    console.log(query);
     console.log(localQueries);
-    return true;
+    console.log(query);
+    if (query.length > 0)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
 
   getRandomQuote(): Object
