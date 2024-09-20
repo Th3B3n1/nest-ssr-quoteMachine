@@ -21,8 +21,10 @@ export class AppService {
 
   deleteQuery(id: number): boolean
   {
-    let query = queries.quotes.slice(id - 1);
+    let localQueries = queries;
+    let query = localQueries.quotes.splice(id - 1, 1);
     console.log(query);
+    console.log(localQueries);
     return true;
   }
 
