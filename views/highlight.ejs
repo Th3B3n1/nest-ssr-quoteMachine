@@ -6,6 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <p><%= data[0] %><b><%= highlight %></b><%= data[1] || "" %></p>
+    <div style="display: flex; flex-direction: row; align-items: center;">
+        <p><%= data[0] %>
+        <% for(let i = 1; i < data.length; i++) { %>
+            <b><%= highlight %></b><%= data[i] || "" %></p>
+        <% } %>
+    </div>
 </body>
 </html>
