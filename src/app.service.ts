@@ -59,4 +59,48 @@ export class AppService {
     let finalDict: Map<string, number> = new Map(sortedDict.reverse());
     return finalDict;
   }
+
+  getQuotesFromGivenText(text: string): Array<Object>
+  {
+    let quotes: Array<Object> = new Array<Object>
+    for (let i: number = 0; i < queries.quotes.length; i++)
+    {
+      if (queries.quotes[i].quote.includes(text))
+      {
+        quotes.push(queries.quotes[i]);
+      }
+    }
+    return quotes;
+  }
+
+  getAuthorRandom(author: string): string
+  {
+    if (author != undefined && author != "" && author != " ")
+    {
+      let quotes: Array<Object> = new Array<Object>
+      for (let i: number = 0; i < queries.quotes.length; i++)
+      {
+        if (queries.quotes[i].author == author)
+        {
+          quotes.push(queries.quotes[i]);
+        }
+      }
+      if (quotes.length > 0)
+      {
+        return quotes[randomInt(quotes.length)]["quote"];
+      }
+      else
+      {
+        return "Not found";
+      }
+    }
+    else
+    {
+      return "Not found";
+    }
+  }
+  sliceText(text: string, splitAt: string): string[]
+  {
+    return text.split(splitAt)
+  }
 }

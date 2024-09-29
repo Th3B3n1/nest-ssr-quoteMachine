@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Query, Render } from '@nestjs/common';
+import { Controller, Get, Param, Query, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -52,5 +52,48 @@ export class AppController {
     return {
       finalDict: this.appService.getTopAuthors()
     };
+  }
+
+  @Get("search")
+  @Render("search")
+  search(@Query() query)
+  {
+    return {
+      data: this.appService.getQuotesFromGivenText(query.text)
+    }
+  }
+
+  @Get("authorRandomForm")
+  @Render("authorRandomForm")
+  getAuthorRandomForm(){}
+
+  @Get("authorRandom")
+  @Render("authorRandom")
+  getAuthorRandom(@Query() query)
+  {
+    return {
+      data: this.appService.getAuthorRandom(query.author) 
+    }
+  }
+
+  @Get("highlight/:id")
+  @Render("highlight")
+  highlight(@Param("id") id, @Query() query)
+  {
+    let quote: string = this.appService.getQuery(id)["quote"];
+    if (quote.includes(query.text))
+    {
+      return {
+        data: this.appService.sliceText(quote, query.text),
+        highlight: query.text
+      }
+    }
+    else
+    {
+      return {
+        data: [quote],
+        highlight: ""
+      }
+    }
   }
 }
